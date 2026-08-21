@@ -82,7 +82,7 @@ profile_default/
 ipython_config.py
 
 # pyenv
-.python-version
+#.python-version
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Proyecto Neumonia - artefactos generados en tiempo de ejecucion
+*.h5
+historial.csv
+Reporte*.jpg
+Reporte*.pdf

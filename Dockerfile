@@ -1,9 +1,16 @@
-FROM python:latest
+FROM python:3.10-slim
 
 RUN apt-get update -y && \
-    apt-get install python3-opencv -y 
+    apt-get install -y --no-install-recommends python3-opencv && \
+    rm -rf /var/lib/apt/lists/*
 
-WORKDIR /home/src
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
 
-COPY . ./
-RUN pip install -r requirements.txt
+WORKDIR /app
+
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev
+
+COPY . .
+
+CMD ["uv", "run", "pytest", "-v"]
